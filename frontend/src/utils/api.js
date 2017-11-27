@@ -48,8 +48,8 @@ export function getAllCategories () {
       .then(obj => obj )
   }
   
-  export function getPostComment (id) {
-    return fetch(`${backend_url}/posts/${id}/comments`, {headers})
+  export function getAllCommentFromPost (post_id) {
+    return fetch(`${backend_url}/posts/${post_id}/comments`, {headers})
       .then((res) => res.json())
       .then(obj => obj)
   }
@@ -72,7 +72,7 @@ export function getAllCategories () {
       .then(obj => obj)
   }
   
-  export function voteComment (id,option) {
+  export function voteComment (id, option) {
     return fetch(`${backend_url}/comments/${id}`, {method: 'POST', headers: headers, body: JSON.stringify({ option }) }) 
       .then((res) => res.json())
       .then(obj => obj )
