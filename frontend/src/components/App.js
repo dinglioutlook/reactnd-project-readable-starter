@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import {Route, withRouter, Switch} from 'react-router-dom'
+import {connect} from 'react-redux'
+import Root from './Root'
+import PostForm from './PostForm'
+import CommentForm from './CommentForm'
+import PostList from './PostList'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Switch>
+          <Route exact path={`/addPost`} component={PostForm} />
+          <Route exact path = {`/editPost`} component={PostForm} />
+          <Route exact path = {`/addComment`} component={CommentForm} />
+          <Route exact path = {`/editComment`} component={CommentForm} />
+          <Route path = {`/:category?`} component={Root} />
+          <Route exact path = {`/:category:id`} component={PostList} />
+        </Switch>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(connect()(App));
