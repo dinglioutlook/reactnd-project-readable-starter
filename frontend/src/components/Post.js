@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 
 class Post extends Component{
-    componentDidCatch(){
+    componentDidMount(){
 
     }
 
@@ -16,7 +16,6 @@ class Post extends Component{
     onDeleteComment(comment){}
 
     render(){
-        
         const {post, comment} = this.props
 
         return(
