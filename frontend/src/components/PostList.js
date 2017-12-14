@@ -27,7 +27,7 @@ class PostList extends Component {
         return(
             <div>
                 {
-                    selectPosts.map((post)=>
+                    selectPosts.map((post) =>
                 (
                    <div key = {post.id}>
                         <div>
@@ -48,25 +48,22 @@ class PostList extends Component {
                             <p>{post.body}</p>
                             <div className='comments' />
                             <div className="comments-icon">
-                                <Link 
-                                to={{
-                                    pathname: `/${post.category}/${post.id}`,
-                                    state: post.id
-                                }}>
-                               
+                            <div className='comments'>
                                 <strong> {post.commentCount} </strong> 
-                                </Link>
+                            </div>    
+
+                                <div className = 'edit-post'>
                                 <Link 
                                     to={{
                                         pathname: `/editPost`, 
                                         state: post                       
                                     }}>
+                                    Edit Post
                                 </Link>
-
+                                </div>        
                                 <i className="post-delete" onClick={() => this.onDelete(post)}> Delete </i>
                             </div>
                         </div>
-
                    </div>     
                 ))}
             </div>

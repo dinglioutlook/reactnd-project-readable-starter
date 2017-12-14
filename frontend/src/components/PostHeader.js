@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 const PostHeader = (props) =>{
-    const {categories, order, postby} = props;
+    const {categories, order, orderPostBy} = props;
     const orderby = ['Date', 'Votes'];
     return (
         <div className='post-Header'>
@@ -28,13 +28,17 @@ const PostHeader = (props) =>{
                             <button 
                                 type = 'button'
                                 key = {option.length}
-                                onClick = {()=>postby(option)}
-                            >
+                                onClick = {()=>orderPostBy(option)}
+                            >{option}
                             </button>
                         )
                     )
                         }
                     </div>
+                </div>
+
+                <div className='add-post'>
+                    <Link className="add-post-link" to="/addPost">Add Post</Link> 
                 </div>
            </div>
         </div>

@@ -54,7 +54,7 @@ function categories (state=[], action){
 
 
 function posts(state=[], action){
-    const {posts, post, editPost} = action
+    const {posts, post} = action
 
     switch (action.type) {
         case GET_ALL_POST:
@@ -62,11 +62,11 @@ function posts(state=[], action){
         case ADD_POST:
         return[...state, post]
         case DELETE_POST:
-        return state.filter(post => post.id !== editPost.id)
+        return [...post]
         case EDIT_POST:
-        return state.map(post => post.id === editPost.id ? editPost : post)
+        return [...post]
         case VOTE_POST:
-        return state.map(post => post.id === editPost.id ? editPost : post)
+        return [...post]
         default:
         return state;
     }
