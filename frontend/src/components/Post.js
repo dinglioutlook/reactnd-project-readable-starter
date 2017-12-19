@@ -41,18 +41,18 @@ class Post extends Component{
             {this.checkUrlCategory(post) ? (
             <div>
               <div className="row">
-                <div className="post-vote">
-                  <i 
-                    onClick={() => this.onVote(post.id,'upVote')}></i>
-                  <span className="post-num-votes">{post.voteScore}</span>
-                  <i 
-                    onClick={() => this.onVote(post.id,'downVote')}></i>
-                </div>
     
                 <div className="col">
                 <h1>{post.title}</h1>
                 <p className="author-name">by {post.author} </p>
                 <p>{post.body}</p>
+                <div className="post-vote">
+                  <button 
+                    onClick={() => this.onVotePost(post.id,'upVote')}>Up Vote</button>
+                  <span className="post-num-votes">{post.voteScore} for post votes</span>
+                  <button 
+                    onClick={() => this.onVotePost(post.id,'downVote')}>Down vote</button>
+                </div>
     
                 <div className="row mt">
                   <div>
@@ -86,8 +86,9 @@ class Post extends Component{
               {comments.map((comment) => (
                 <div key={comment.id} >        
                   <div>
-                    <i onClick={() => this.onVoteComment(comment.id,'upVote')}></i>
+                    <button onClick={() => this.onVoteComment(comment.id,'upVote')}>Up vote</button>
                     <span >{comment.voteScore}</span>
+                    <button onClick={() => this.onVoteComment(comment.id,'downVote')}>Down vote</button>
                   </div>
     
                   <div>         

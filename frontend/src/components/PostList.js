@@ -31,11 +31,6 @@ class PostList extends Component {
                     selectPosts.map((post) =>
                 (
                    <div key = {post.id}>
-                        <div>
-                            <button className='vote-up' onClick={()=> this.onVote(post.id, 'upVote')}> up </button>
-                            <span className="post-num-votes">{post.voteScore}</span>
-                            <button className = 'vote-down' onClick={()=> this.onVote(post.id, 'downVote')} > down </button>
-                        </div>
                         <div className='postTitle'>
                             <Link to={
                                 {
@@ -47,6 +42,13 @@ class PostList extends Component {
                             </Link>
                             <p className="author-name">by {post.author} </p>               
                             <p>{post.body}</p>
+
+                            <div>
+                            <button className='vote-up' onClick={()=> this.onVote(post.id, 'upVote')}> Up vote</button>
+                            <span className="post-num-votes">{post.voteScore} on post votes</span>
+                            <button className = 'vote-down' onClick={()=> this.onVote(post.id, 'downVote')} > Down vote</button>
+                            </div>
+                           
                             <div className='comments' />
                             <div className="comments-icon">
                             <div className='comments'>
@@ -68,7 +70,7 @@ class PostList extends Component {
                                     Edit Post
                                 </Link>
                                 </div>        
-                                <i className="post-delete" onClick={() => this.onDelete(post)}> Delete </i>
+                                <button className="post-delete" onClick={() => this.onDelete(post)}> Delete </button>
                             </div>
                         </div>
                    </div>     
