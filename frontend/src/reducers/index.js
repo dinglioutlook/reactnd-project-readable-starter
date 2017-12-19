@@ -12,28 +12,25 @@ import { combineReducers } from 'redux';
     ADD_COMMENT,
     DELETE_COMMENT,
     EDIT_COMMENT,
-    VOTE_COMMENT,
-    edit_post
+    VOTE_COMMENT
  } from '../actions'
 
-
-
-function comment (state={}, action){
-    const {comment} = action
+function comments (state=[], action){
+    const {comment, comments} = action
 
     switch (action.type)
     {
         case ADD_COMMENT:
-            return {...comment}
+            return [...state, comment]
         
         case GET_POST_COMMENT:
-            return {...comment}
+            return comments
 
         case DELETE_COMMENT:
             return state.filter(c => c.id !== comment.id)
 
         case VOTE_COMMENT:
-            return state.filter(c => c.id === comment.id ? comment : c)
+            return state.map(c => c.id === comment.id ? comment : c)
 
         default:
             return state
@@ -61,29 +58,30 @@ function posts(state=[], action){
         return [...posts]
         case ADD_POST:
         return[...state, post]
-        case DELETE_POST:
-        return [...post]
-        case EDIT_POST:
-        return [...post]
-        case VOTE_POST:
-        return [...post]
         default:
         return state;
     }
 }
 
 
-function post(state={}, action){
-    const {post, editPost} = action;
+function post(state=[], action){
+    const {post} = action;
 
     switch(action.type){
         case GET_POST:
-        return post
+            return post
         case VOTE_POST:
-        return edit_post
-
-        default: return state;
+            return post
+        case EDIT_POST:
+            return post
+        case DELETE_POST:
+            return post
+        case VOTE_POST:
+            return post
+        
+        default: 
+            return state;
     }
 }
 
-export default combineReducers({comment, post, categories, posts})
+export default combineReducers({comments, post, categories, posts})

@@ -28,54 +28,104 @@ class Post extends Component{
         this.props.dispatch(delete_comment(comment))
     }
 
+    checkUrlCategory(post){
+        return post.category === this.props.match.params.category ? true : false
+    }
+
     render(){
-        const {post, comment} = this.props;
+        const {post, comments} = this.props;
         const post_category = this.props.match.params.category; 
 
         return(
-            <div className="post-container">
-                        <div>
-                            <i className='voteUp' onClick={()=> this.onVote(post.id, 'upVote')} />
-                            <span className="post-num-votes">{post.voteScore}</span>
-                            <i className = 'voteDown' onClick={()=> this.onVote(post.id, 'downVote')} />
-                        </div>
-                        <div className='postTitle'>
-                            <Link to={
-                                {
-                                    pathname: `/${post.category}/${post.id}`,
-                                    state: post.id
-                                }
-                            }>
-                            <h1> {post.title} </h1>
-                            </Link>
-                            <p className="author-name">by {post.author} </p>               
-                            <p>{post.body}</p>
-                            <div className='comments' />
-                            <div className="comments-icon">
-                            <div className='comments'>
-                                <strong> {post.commentCount} </strong> 
-                            </div>    
-                                <div className = 'edit-post'>
-                                <Link 
-                                    to={{
-                                        pathname: `/editPost`, 
-                                        state: post                       
-                                    }}>
-                                    Edit Post
-                                </Link>
-                                </div>        
-                                <i className="post-delete" onClick={() => this.onDelete(post)}> Delete </i>
-                            </div>
-                        </div>
+            <div className="container">
+            {this.checkUrlCategory(post) ? (
+            <div>
+              <div className="row">
+                <div className="post-vote">
+                  <i 
+                    onClick={() => this.onVote(post.id,'upVote')}></i>
+                  <span className="post-num-votes">{post.voteScore}</span>
+                  <i 
+                    onClick={() => this.onVote(post.id,'downVote')}></i>
+                </div>
+    
+                <div className="col">
+                <h1>{post.title}</h1>
+                <p className="author-name">by {post.author} </p>
+                <p>{post.body}</p>
+    
+                <div className="row mt">
+                  <div>
+                    <strong> {post.commentCount} </strong> Comments
+                  </div>
+                  <div className="col-sm">
+                    <Link 
+                      to={{
+                        pathname: `/editPost`, 
+                        state: post                       
+                      }}>
+                      <i> Edit </i>                      
+                    </Link>
+                  </div>
+                  <div>
+                    <Link to="/">
+                      <i onClick={() => this.onDeletePost(post)}> Delete </i>
+                    </Link>            
+                  </div>
+                </div>
+                </div>
+              </div>
+    
+              <div className="add-comment">
+                <h1>Comments</h1>
+                <Link to={{ pathname:`/addComment`, state: {id: post.id, postUrl: this.props.location.pathname} }}>
+                  <i> Add Comment </i>
+                </Link> 
+              </div>
+    
+              {comments.map((comment) => (
+                <div key={comment.id} >        
+                  <div>
+                    <i onClick={() => this.onVoteComment(comment.id,'upVote')}></i>
+                    <span >{comment.voteScore}</span>
+                  </div>
+    
+                  <div>         
+                    <p>{comment.body}</p>
+                    <p className="author-name">by {comment.author} </p>
+    
+                    <div>
+                      <div>
+                      </div>
+                      <div>
+                        <Link 
+                          to={{
+                            pathname: `/editComment`, 
+                            state: {...comment, postUrl: this.props.location.pathname}
+                          }}>
+                          <i> Edit </i>                      
+                        </Link>
+                      </div>
+                      <div>
+                        <i onClick={() => this.onDeleteComment(comment)}> Delete </i>           
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
+            ) : (
+              <NotFoundPage />
+            )}
+          </div>
         );
     }
 }
 
-function mapStateToProps({post, comment}){
+function mapStateToProps({post, comments}){
     return {
         post,
-        comment
+        comments
     }
 }
 

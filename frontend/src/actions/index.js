@@ -36,7 +36,7 @@ const get_categories_action = (categories) => (
 )
 
 export const get_categories =() => dispatch => {
-    getAllCategories().then( categories => {
+    getAllCategories().then(categories => {
             dispatch(get_categories_action(categories))
         }
     )
@@ -50,8 +50,8 @@ const get_post_action = post =>(
 )
 
 export const get_post =(id) => dispatch => {
-    getPost().then((id) => {
-        dispatch(get_post_action(id))
+    getPost(id).then((post) => {
+        dispatch(get_post_action(post))
       }
     )
 }
@@ -69,10 +69,10 @@ export const get_all_post = () => dispatch => {
     })
 }
 
-const get_comment_action = comment => (
+const get_comment_action = comments => (
     {
         type: GET_POST_COMMENT,
-        comment
+        comments
     }
 )
 
@@ -118,7 +118,7 @@ const delete_comment_action = comment => (
     }
 )
 export const delete_comment = (comment) => dispatch => {
-    deleteComment(comment).then(
+    deleteComment(comment.id).then(
         (_comment) => {
             dispatch(delete_comment_action(_comment))
         }
@@ -160,7 +160,7 @@ const delete_post_action = post => (
     }
 )
 export const delete_post = (post) => dispatch => {
-    deletePost(post).then(
+    deletePost(post.id).then(
         (_post) => {
             dispatch(delete_post_action(_post))
         }

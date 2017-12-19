@@ -20,6 +20,7 @@ class PostList extends Component {
 
     render(){
         const { posts, selectCategory, selectBy } = this.props;
+        console.log(posts)
         const selectPosts = posts.filter((a) => 
             selectCategory === 'All'? true: a.category === selectCategory
             ).sort((c, d) => selectBy === 'Date'? c.timestamp - d.timestamp : c.voteScore - d.voteScore )
@@ -31,9 +32,9 @@ class PostList extends Component {
                 (
                    <div key = {post.id}>
                         <div>
-                            <i className='voteUp' onClick={()=> this.onVote(post.id, 'upVote')} />
+                            <button className='vote-up' onClick={()=> this.onVote(post.id, 'upVote')}> up </button>
                             <span className="post-num-votes">{post.voteScore}</span>
-                            <i className = 'voteDown' onClick={()=> this.onVote(post.id, 'downVote')} />
+                            <button className = 'vote-down' onClick={()=> this.onVote(post.id, 'downVote')} > down </button>
                         </div>
                         <div className='postTitle'>
                             <Link to={
@@ -49,8 +50,14 @@ class PostList extends Component {
                             <div className='comments' />
                             <div className="comments-icon">
                             <div className='comments'>
-                                <strong> {post.commentCount} </strong> 
-                            </div>    
+                            <Link 
+                                to={{
+                                pathname: `/${post.category}/${post.id}`,
+                                state: post.id
+                                }}>
+                                <i className="fa fa-comment " aria-hidden="true"></i>
+                                <strong> {post.commentCount} </strong> Comments
+                          </Link>                            </div>    
 
                                 <div className = 'edit-post'>
                                 <Link 

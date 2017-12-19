@@ -2,7 +2,7 @@ const backend_url = "http://localhost:3001"
 
 const headers = {
     'Accept': 'application/json',
-    'Authorization': 'whatever-you-want',
+    'Authorization': 'whatever-want',
     'Content-Type':'application/json'
 }
 

@@ -6,9 +6,7 @@ import React, {Component} from 'react'
 import uuid from 'js-uuid';
 
 class PostForm extends Component {
-    constructor (props){
-        super(props)
-        this.state = {
+    state = {
           id: '',
           timestamp: '',
           title: '',
@@ -16,7 +14,6 @@ class PostForm extends Component {
           author: '',
           category: 'react'            
         }
-      }
 
     componentDidMount(){
         if(this.props.location.state){

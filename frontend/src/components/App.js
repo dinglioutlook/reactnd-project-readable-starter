@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import Root from './Root'
 import Post from './Post'
 import PostForm from './PostForm'
-import CommentList from './CommentList'
+import Comment from './Comment'
 import {NotFoundPage} from './NotFoundPage'
 
 class App extends Component {
@@ -15,8 +15,8 @@ class App extends Component {
         <Switch>
           <Route exact path={`/addPost`} component={PostForm} />
           <Route exact path = {`/editPost`} component={PostForm} />
-          <Route exact path = {`/addComment`} component={CommentList} />
-          <Route exact path = {`/editComment`} component={CommentList} />
+          <Route exact path = {`/addComment`} component={Comment} />
+          <Route exact path = {`/editComment`} component={Comment} />
           <Route exact path = {`/:category?`} component={Root} />
           <Route exact path = {`/:category/:id`} component={Post} />
           <Route component = {NotFoundPage} />
