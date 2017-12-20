@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Header from './Header'
 import {Route, withRouter, Switch} from 'react-router-dom'
 import {connect} from 'react-redux'
 import Root from './Root'
@@ -11,7 +12,9 @@ import {NotFoundPage} from './NotFoundPage'
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div>
+      <Header />
+      <section className="App">
         <Switch>
           <Route exact path={`/addPost`} component={PostForm} />
           <Route exact path = {`/editPost`} component={PostForm} />
@@ -21,7 +24,8 @@ class App extends Component {
           <Route exact path = {`/:category/:id`} component={Post} />
           <Route component = {NotFoundPage} />
         </Switch>
-      </div>
+      </section>
+    </div>
     );
   }
 }

@@ -13,7 +13,7 @@ import { combineReducers } from 'redux';
     DELETE_COMMENT,
     EDIT_COMMENT,
     VOTE_COMMENT
- } from '../actions'
+ } from '../actions/actionTypes'
 
 function comments (state=[], action){
     const {comment, comments} = action
@@ -58,6 +58,10 @@ function posts(state=[], action){
         return [...posts]
         case ADD_POST:
         return[...state, post]
+        case DELETE_POST:
+            return state.filter(c => c.id !== post.id)
+        case VOTE_POST:
+            return state.map(c => c.id === post.id ? post : c)
         default:
         return state;
     }
@@ -70,15 +74,12 @@ function post(state=[], action){
     switch(action.type){
         case GET_POST:
             return post
-        case VOTE_POST:
-            return post
         case EDIT_POST:
             return post
         case DELETE_POST:
             return post
         case VOTE_POST:
             return post
-        
         default: 
             return state;
     }

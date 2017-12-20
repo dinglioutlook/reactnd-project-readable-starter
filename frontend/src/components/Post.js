@@ -41,17 +41,16 @@ class Post extends Component{
             {this.checkUrlCategory(post) ? (
             <div>
               <div className="row">
-    
                 <div className="col">
                 <h1>{post.title}</h1>
                 <p className="author-name">by {post.author} </p>
                 <p>{post.body}</p>
                 <div className="post-vote">
                   <button 
-                    onClick={() => this.onVotePost(post.id,'upVote')}>Up Vote</button>
+                    onClick={() => this.onVotePost(post.id,'upVote')}>Up Vote</button> 
                   <span className="post-num-votes">{post.voteScore} for post votes</span>
                   <button 
-                    onClick={() => this.onVotePost(post.id,'downVote')}>Down vote</button>
+                    onClick={() => this.onVotePost(post.id,'downVote')}>Down vote</button> 
                 </div>
     
                 <div className="row mt">
